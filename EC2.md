@@ -59,3 +59,32 @@ curl \
 
 _tip: you can just run the `aws describe-instances | jq` command described above to grab the `PublicIp` and save it in an environment variable_
 
+# Security Groups
+
+## Revoking Inbound Rule
+
+```
+aws \
+  --profile personal \
+  ec2 describe-instances \
+  | jq '.Reservations[0].Instances[0].SecurityGroups[0].GroupId' -r \
+    | xargs -I {} aws \
+      --profile personal \
+      ec2 revoke-security-group-ingress \
+      --group-id {} \
+      --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}]}]'
+```
+
+## Authorizing Inbound Rule
+
+```
+aws \
+  --profile personal \
+  ec2 describe-instances \
+  | jq '.Reservations[0].Instances[0].SecurityGroups[0].GroupId' -r \
+    | xargs -I {} aws \
+      --profile personal \
+      ec2 authorize-security-group-ingress \
+      --group-id {} \
+      --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}]}]'
+```
