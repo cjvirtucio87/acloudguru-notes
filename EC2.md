@@ -169,3 +169,5 @@ You can't take an image that has its volume encrypted and launch a new instance 
 
 CloudTrail tracks user and resource activity through the console and through the API.
 
+CloudTrail is for auditing; Cloud _Watch_ is for performance metrics.
+
