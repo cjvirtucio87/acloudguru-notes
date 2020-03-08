@@ -135,5 +135,20 @@ There's a summary [here](https://medium.com/awesome-cloud/aws-difference-between
 
 ### Transferring EBS volume to a different AZ
 
-1. Create a snapshot of the EBS volume.
-1. Create a volume from the snapshot in a different AZ.
+1. Create a snapshot of the EBS volume in a different AZ from the volume.
+1. Create an image from the snapshot.
+1. Launch an instance from the image (AMI) that you created.
+
+You now have a running instance with a volume in a different AZ.
+
+### Encryption
+
+#### Encrypt an unencrypted volume
+
+1. Create a snapshot of the volume.
+1. Copy the snasphot (with `Encrypt this snapshot` checked)
+1. Create an image from the newly-encrypted snapshot.
+1. Launch a new instance with the newly-created AMI.
+
+You now have a running instance with an encrypted volume.
+
