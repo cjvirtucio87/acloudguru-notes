@@ -127,3 +127,13 @@ aws ec2 run-instances \
   --block-device-mappings "$(cat templates/amazon_linux_2_hv2_ssd_volume_type/block_device_mappings.json)"
 ```
 
+## Storage
+
+### EBS-backed vs Instance Store-backed
+
+There's a summary [here](https://medium.com/awesome-cloud/aws-difference-between-ebs-and-instance-store-f030c4407387).
+
+### Transferring EBS volume to a different AZ
+
+1. Create a snapshot of the EBS volume.
+1. Create a volume from the snapshot in a different AZ.
