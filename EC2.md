@@ -152,3 +152,7 @@ You now have a running instance with a volume in a different AZ.
 
 You now have a running instance with an encrypted volume.
 
+#### New instance from image with encrypted volume must also have its volume encrypted
+
+You can't take an image that has its volume encrypted and launch a new instance with that volume set to _unencrypted_.
+
