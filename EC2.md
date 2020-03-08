@@ -156,3 +156,16 @@ You now have a running instance with an encrypted volume.
 
 You can't take an image that has its volume encrypted and launch a new instance with that volume set to _unencrypted_.
 
+# CloudWatch
+
+## Metrics monitored
+
+* Compute
+* Storage
+* Content Delivery
+* Host-level Metrics
+
+## vs. CloudTrail
+
+CloudTrail tracks user and resource activity through the console and through the API.
+
