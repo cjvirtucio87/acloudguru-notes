@@ -4,12 +4,12 @@
 
 Need the following profile `"${HOME}/.aws/credentials"`:
 
-``` 
+```
 [personal]
 region = us-east-1
-aws_secret_access_key = [REDACTED] 
-aws_access_key_id = [REDACTED] 
-ca_bundle = /path/to/ca/bundle 
+aws_secret_access_key = [REDACTED]
+aws_access_key_id = [REDACTED]
+ca_bundle = /path/to/ca/bundle
 ```
 
 ## ssh
@@ -88,3 +88,42 @@ aws \
       --group-id {} \
       --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}]}]'
 ```
+
+# Instances
+
+## Key Pairs
+
+To create a key pair:
+
+```
+aws ec2 create-key-pair --key-name <your key-pair name>
+```
+
+The json response will look like this:
+
+```
+{
+    "KeyFingerprint": "...",
+    "KeyMaterial": "...",
+    "KeyName": <your key-pair name>,
+    "KeyPairId": "..."
+}
+```
+
+Save the content of `KeyMaterial` in a file in your `.ssh` folder. Lock down the permissions:
+
+```
+chmod 0600 ~/.ssh/<your private key with the KeyMaterial>
+```
+
+## Creating
+
+```
+aws ec2 run-instances \
+  --image-id <id for Amazon Linux 2 AMI (HVM), SSD Volume Type> \
+  --count 1 \
+  --key-name <your key-pair name> \
+  --security-groups web-dmz \
+  --block-device-mappings "$(cat templates/amazon_linux_2_hv2_ssd_volume_type/block_device_mappings.json)"
+```
+
