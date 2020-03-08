@@ -1,16 +1,17 @@
 [
   {
-    "DeviceName": "string",
-    "VirtualName": "string",
     "Ebs": {
-      "DeleteOnTermination": true|false,
-      "Iops": integer,
-      "SnapshotId": "string",
-      "VolumeSize": integer,
-      "VolumeType": "standard"|"io1"|"gp2"|"sc1"|"st1",
-      "KmsKeyId": "string",
-      "Encrypted": true|false
-    },
-    "NoDevice": "string"
+      "VolumeType": "sc1"
+    }
+  },
+  {
+    "Ebs": {
+      "VolumeType": "st1"
+    }
+  },
+  {
+    "Ebs": {
+      "VolumeType": "standard"
+    }
   }
 ]
