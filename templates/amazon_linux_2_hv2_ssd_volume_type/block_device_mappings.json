@@ -1,16 +1,22 @@
 [
   {
+    "DeviceName": "/dev/sdb",
     "Ebs": {
+      "VolumeSize": 500,
       "VolumeType": "sc1"
     }
   },
   {
+    "DeviceName": "/dev/sdb",
     "Ebs": {
+      "VolumeSize": 500,
       "VolumeType": "st1"
     }
   },
   {
+    "DeviceName": "/dev/sdb",
     "Ebs": {
+      "VolumeSize": 8,
       "VolumeType": "standard"
     }
   }
