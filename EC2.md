@@ -171,3 +171,50 @@ CloudTrail tracks user and resource activity through the console and through the
 
 CloudTrail is for auditing; Cloud _Watch_ is for performance metrics.
 
+# IAM
+
+## JSON Policy Elements
+
+The basics:
+
+```
+{
+  "Version": "2012-10-17",
+  // the main element of a policy
+  "Statement": [
+    {
+      // what to do regarding the actions
+      "Effect": "Allow",
+      // the action(s) to be allowed/denied on the resource
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation"
+      ],
+      // the resource to be the target of the actions allowed/denied
+      "Resource": "arn:aws:s3:::*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::BUCKET-NAME",
+      // basically calling a function like so:
+      // StringLike("s3:prefix", ["", "home/", "home/${aws:username}"])
+      // if true, request to ListBucket goes thru
+      // can be global or service-specific; global uses aws prefix; in this case, condition is s3-specific
+      "Condition": {"StringLike": {"s3:prefix": [
+        "",
+        "home/",
+        "home/${aws:username}/"
+      ]}}
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::BUCKET-NAME/home/${aws:username}",
+        "arn:aws:s3:::BUCKET-NAME/home/${aws:username}/*"
+      ]
+    }
+  ]
+}
+```
