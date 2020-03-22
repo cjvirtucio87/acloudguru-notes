@@ -223,26 +223,17 @@ Trust policies:
 
 ```json
 {
-    "Role": {
-        "AssumeRolePolicyDocument": {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Action": "sts:AssumeRole",
-                    "Effect": "Allow",
-                    // the Principal is the entity being allowe/denied the action
-                    // in this case, we are allowing the ec2 service to execute the AssumeRole action on role, s3access
-                    "Principal": {
-                        "Service": "ec2.amazonaws.com"
-                    }
-                }
-            ]
-        },
-        "RoleId": "AROAIIZKPBKS2LEXAMPLE",
-        "CreateDate": "2013-12-12T23:46:37.247Z",
-        "RoleName": "s3access",
-        "Path": "/",
-        "Arn": "arn:aws:iam::123456789012:role/s3access"
-    }
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Action": "sts:AssumeRole",
+          "Effect": "Allow",
+          // the Principal is the entity being allowe/denied the action
+          // in this case, we are allowing the ec2 service to execute the AssumeRole action on the role that this trust policy will be used with
+          "Principal": {
+              "Service": "ec2.amazonaws.com"
+          }
+      }
+  ]
 }
 ```
